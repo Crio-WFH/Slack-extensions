@@ -41,6 +41,18 @@
         "doc",
         "code"
       ]
+    },
+    {
+      "login": "Ak-Shaw",
+      "name": "Ayush Kumar Shaw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51538194?v=4",
+      "profile": "https://akshawz.netlify.app/",
+      "contributions": [
+        "maintenance",
+        "review",
+        "doc",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
