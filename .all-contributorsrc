@@ -1,0 +1,27 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "sudhanshutiwari264",
+      "name": "Sudhanshu tiwari",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62458868?v=4",
+      "profile": "https://www.linkedin.com/in/sudhanshutiwari264",
+      "contributions": [
+        "maintenance",
+        "review",
+        "doc",
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Slack-extensions",
+  "projectOwner": "Crio-WFH",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
