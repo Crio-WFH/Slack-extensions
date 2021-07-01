@@ -1,0 +1,27 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "archithdwij",
+      "name": "Archithdwij",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30730368?v=4",
+      "profile": "https://github.com/archithdwij",
+      "contributions": [
+        "maintenance",
+        "review",
+        "doc",
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Slack-extensions",
+  "projectOwner": "Crio-WFH",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
