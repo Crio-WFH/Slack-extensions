@@ -36,9 +36,9 @@ $ git clone https://github.com/<User-Name>/<Repo-Name>.git
 $ git clone git@github.com:<User-Name>/<Repo-Name>.git
 
 ## Add upstream remote
-$ git remote add upstream https://github.com/Crio-WFH/AWS-Lambda-functions.git
+$ git remote add upstream https://github.com/Crio-WFH/Slack-extensions.git
 # - OR -
-$ git remote add upstream git@github.com:Crio-WFH/AWS-Lambda-functions.git
+$ git remote add upstream git@github.com:Crio-WFH/Slack-extensions.git
 
 ## Syncing with upstream/main branch
 $ git fetch upstream
