@@ -9,6 +9,11 @@
 <a href="https://twitter.com/crio_do"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/crio_do?style=for-the-badge&color=09f&labelColor=black&logo=twitter&label=@crio_do"></a>
 
 # Introduction
+Extensions are made of different, but cohesive, components. Components can include background scripts, content scripts, an options page, UI elements and various logic files. Extension components are created with web development technologies: HTML, CSS, and JavaScript. An extension's components will depend on its functionality and may not require every option.
+
+References To get started :
+- [Slack API](https://api.slack.com/start/building)
+
 
 ## Contributors ✨
 
