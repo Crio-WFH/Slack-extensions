@@ -1,13 +1,24 @@
+# Pull Request Checklist
 
-Check on whether it's 
-<!-- to check put x inside [] eg. [x] -->
- 
+Go through the check boxes given below and make sure you check the relevant ones.
+
+Is your project an
+### to check put x inside [] eg. [x] Extension
 - [ ] Extension 
 - [ ] Application
 
-Had you done the following : 
 
-- [ ] Summary added !
+Below given are the mandatory requirements we expect from your project. Your Pull Request will be reviewed only if all the minimum requirements relevant to your project are satisfied.
 
-### once your pr get's merged take some time ⏲️, celebrate 🥳 and share it with the community on slack .
- 
+- [ ] Added readme.md to my project folder with relevant information.
+- [ ]  I have provided the demo video link (showing the functionality in action) or the public deployment link of my extension of application within the readme.md (if Applicable).
+- [ ] I have explained the process in a readable manner within readme.md.
+
+Terms and Conditions: 
+
+`Plagiarism check from Team Crio will be solid and if your code is found to be plagiarized, the team has every right to reject your Pull Request and take necessary actions.`
+- [ ] I can assure you that this is my own contribution and I did not involve in any kind of plagarism activities.
+
+Buckle up and wait till you recieve communication from the review team. Keep a tab on this pull request page for comments on your project. Any necessary suggestions will also be provide here. All the best :)
+
+### once your PR get's merged, take some time ⏲️, celebrate 🥳 and share it with the community on slack. 
