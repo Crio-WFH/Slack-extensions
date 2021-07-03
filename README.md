@@ -8,8 +8,33 @@
 
 <a href="https://twitter.com/crio_do"><img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/crio_do?style=for-the-badge&color=09f&labelColor=black&logo=twitter&label=@crio_do"></a>
 
+#### DISCLAIMER
+
+    1. Do not touch any other files (Add/Update/Delete) in any of the repositories in the parent branch.
+    2. Any type of changes should be carried out only from your local machine or personal github account. 
+    3. Do not touch the following file(s)/folder(s) 
+        - readme.md (Inside the repository. Your project specific readme is different.) 
+        - .all-contributors-src
+        - CONTRIBUTING.md - For your reference 
+        - .github folder
+
+
 # Introduction
 Extensions are made of different, but cohesive, components. Components can include background scripts, content scripts, an options page, UI elements and various logic files. Extension components are created with web development technologies: HTML, CSS, and JavaScript. An extension's components will depend on its functionality and may not require every option.
+
+### Regarding Submissions 
+
+Please refer to `contributing.md` within the same folder for all the submission guidelines. It contains the documentation process/Demo video to assist you. For the readme structure inside your project, check the readme inside [Project_Name](https://github.com/Crio-WFH/Slack-extensions/tree/main/Project_Name). 
+
+<!--### 1. Fork this repo !
+  ![img](https://github.com/Crio-WFH/demo/blob/main/dont%20delete%20this%20file/Screenshot%20from%202021-07-03%2013-25-36.png)
+  
+### 2. After forking , Made a new folder  
+ ![img2](https://github.com/Crio-WFH/demo/blob/main/dont%20delete%20this%20file/Screenshot%20from%202021-07-03%2013-25-59.png)
+ ![img3](https://github.com/Crio-WFH/demo/blob/main/dont%20delete%20this%20file/Screenshot%20from%202021-07-03%2013-26-20.png)
+ 
+### 3. See [Folder name](https://github.com/Username-demo/Android-apps/tree/main/Project%20name) to view further structure -->
+
 
 References To get started :
 - [Slack API](https://api.slack.com/start/building)
