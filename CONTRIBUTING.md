@@ -9,18 +9,15 @@
 `As a developer who can enhance the experience of the troubled WFH individual. :P`
 
 
-
-\<!-- Place holder for briefing the event details with links where ever required. -->
-
 Kindly refer the [getting started guide](https://docs.google.com/document/d/1z5cJHJkuhkMkWyAPTD7seIzH04MhD0dwNkEC6BvQwFk/edit) for detailed instructions.
 
-#### Note for issue creation and PR proposals
+#### Note for PR proposals
 
-Kindly utilise the templates provided in the `.github` directory of the main branch to create relative issues and PRs. You can also go adventurous if you have something fun in your mind, but kindly maintain a similar workflow by taking the already available templates as a reference.
+Kindly utilise the templates provided in the `.github` directory of the main branch to PRs. You can also go adventurous if you have something fun in your mind, but kindly maintain a similar workflow by taking the already available templates as a reference.
 
 For proposing a PR with a new piece of software, utilise PR template `pull_request_template.md` using GitHub API.
 
-
+Kindly refer the [Submission Guidelines Document](https://docs.google.com/document/d/1DXgKki3EcEEb-99Oqyyq0WLItTBhXj3aZ1swtKkwg6U/edit) for detailed instructions regarding submission via GitHub UI.
 
 
 ### Instructions regarding traditional workflow
