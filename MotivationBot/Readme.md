@@ -9,7 +9,7 @@
 - Can be used when dealing with bad times or need some reaffirmation.
 
 ### Screenshots of the extension/software's working 
-https://github.com/theprogrammedwords/Slack-extensions/blob/main/MotivationBot/Screenshot_slack.png
+<img src="https://github.com/theprogrammedwords/Slack-extensions/blob/main/MotivationBot/Screenshot_slack.png">
 
 ### Demo Video Link
 - [DEMO VIDEO](paste your link here)
