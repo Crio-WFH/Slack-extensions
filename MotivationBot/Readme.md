@@ -12,7 +12,7 @@
 <img src="https://github.com/theprogrammedwords/Slack-extensions/blob/main/MotivationBot/Screenshot_slack.png">
 
 ### Demo Video Link
-- [DEMO VIDEO](paste your link here)
+- [DEMO VIDEO](https://youtu.be/ApOoip605V8)
 
 Commands That work : 
 - help
