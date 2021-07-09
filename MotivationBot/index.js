@@ -1,137 +1,193 @@
-const slackBot = require('slackbots')
+
+// import statements
+const { WebClient, LogLevel } = require('@slack/web-api');
+const { createEventAdapter } = require('@slack/events-api')
 const axios = require('axios')
 
-//initalize bot with token
-const bot = new slackBot({
-    token : 'xoxb-your-token',
-    name : 'Motivator Bot'
+// token assignments from .env
+const slackSigningSecret = process.env.SLACK_SIGNING_SECRET
+const slackToken = process.env.SLACK_TOKEN
+const userToken = process.env.USER_TOKEN
+
+
+// port allocation and event declaration
+const port = process.env.SLACK_PORT || 3000;
+const slackEvents = createEventAdapter(slackSigningSecret)
+const slackClient = new WebClient(slackToken, {
+    logLevel: LogLevel.DEBUG
 })
 
-// start handler
-bot.on('start', ()=>{
-    const params = {
-        icon_emoji: ':bow:'
+// event app_mention based trigger
+slackEvents.on('app_mention',(event) =>{
+    console.log(`got message from user ${event.user}: ${event.text}`);
+    handleMessage(event);
+    debugger;
+});
 
+// event error based log
+slackEvents.on('error', console.error)
+
+// console to output server has started
+slackEvents.start(port).then(()=>{
+    console.log(`Slack Event onStart : Port : Server started on port ${port}`)
+})
+
+
+// message handler (pretty much like a switch case)
+function handleMessage(event){
+
+    const message = event.text
+
+    if(message.includes('advice')){
+        handleAdvices(event);
     }
 
-    //introduction message of bot
-    bot.postMessageToChannel(
-        'motivatorbotdemo', 
-        'Hiya, I am here with you for boosting your morale. 🥺', 
-        params
-        );
+    if(message.includes(' affirmation')){
+        handleAffirmation(event);
+    }
 
-    bot.on('error', (err) => 
-        console.log(err));
+    if(message.includes(' quotes')){
+        handleQuotes(event);
+    }
+    
+    if(message.includes(' help') || message.includes(' Hi') || message.includes(' Hey')){
+        handleHelp(event);
+    }    
+    if(message.includes(' schedule')){
+        scheduleMessage(event)
+    }
+    if(message.includes(' remindme')){
+        remindUser(event)
+    }
+    if(message.includes(' remindus')){
+        remindChannel(event)
+    }
 
-    bot.on('message', (data) => {
+    else if(!message.includes(' advice') 
+            && !message.includes(' affirmation') 
+            && !message.includes(' quotes')
+            && !message.includes(' help')
+            && !message.includes(' schedule')
+            && !message.includes(' remindme')
+            && !message.includes(' remindus')){
+        handleError(event)
+    }
+    console.log('fn handleMessage '+ message + ' '+ event.channel)
+}
 
-        if(data.type != 'message'){
-            return;
-        }
-
-        handleMessage(data.text);
-    })
-
-    //cases on which bot responds
-        function handleMessage(message){
-        if(message.includes(' advice')){
-            handleAdvices();
-        }
-        if(message.includes(' affirmation')){
-            handleAffirmation();
-        }
-        if(message.includes(' quotes')){
-            handleQuotes();
-        }
-        if(message.includes(' help')){
-            handleHelp();
-        }else if(message.includes('<@U027UL7PFUZ>')  && !message.includes(' advice') && !message.includes(' affirmation') && !message.includes(' quotes'))
-            handleError();
-        }
-})
-
-//Advices of bot
-function handleAdvices(){
+// handler for advice keyword
+function handleAdvices(event){
 
     axios.get('https://api.adviceslip.com/advice')
     .then(res =>{
-        const advice = res.data.slip.advice;
-
-        const params = {
-            icon_emoji: ':blush:'
-        }
-    
-        bot.postMessageToChannel(
-            'motivatorbotdemo', 
-            `Advice : ${advice} 🥺👉👈`, 
-            params
-        );    
+        const advice = res.data.slip.advice + '🥺👉👈';
+        postMessage(event, advice)
     })
 }
-//Affirmations of bot
-function handleAffirmation(){
 
+// handler for affirmation keyword
+function handleAffirmation(event){
     axios.get('https://www.affirmations.dev')
     .then(res =>{
-        const affirmation = res.data.affirmation;
-
-        const params = {
-            icon_emoji: ':hugging_face:'
-        }
-    
-        bot.postMessageToChannel(
-            'motivatorbotdemo', 
-            `Affirmation : ${affirmation} 😇👩🏻‍💻`, 
-            params
-        );    
+        const affirmation = res.data.affirmation +'🤗';
+        postMessage(event, affirmation)
     })
 }
 
-//Quotes handle 
-function handleQuotes(){
-
+// handler for quotes keyword
+function handleQuotes(event){
     axios.get("https://type.fit/api/quotes")
     .then(res =>{
         const rand = Math.floor(Math.random()*1000);
-        const quotes = res.data[rand].text;
-        
-        const params = {
-            icon_emoji: ':thinking_face:'
-        }
-    
-        bot.postMessageToChannel(
-            'motivatorbotdemo', 
-            `Quote : ${quotes} 🤔`, 
-            params
-        );    
+        const quotes = res.data[rand].text + '🤔';
+        postMessage(event,quotes)
     })
 }
 
-// help command handle
-function handleHelp(){
-
-        const params = {
-            icon_emoji: ':bow:'
-        }
-    
-        bot.postMessageToChannel(
-            'motivatorbotdemo', 
-            `Please use keywords 'advice' or 'quotes' or 'affirmation' to get good vibes. 😺`, 
-            params
-        );    
+// handler for help keyword
+function handleHelp(event){
+    const helpText = `Hi. Please use keywords 'advice' or 'quotes' or 'affirmation' to get good vibes. 😺`
+    postMessage(event, helpText)
 }
 
-function handleError(){
-
-    const params = {
-        icon_emoji: ':pleading_face:'
+//// handler for error/no match case
+function handleError(event){
+    const helpText = `Hi. Please use keywords 'advice' or 'quotes' or 'affirmation' to get good vibes. 😺`
+    const oops = 'Oops, I dunno what you mean ?!'
+    postMessage(event, oops)
+    postMessage(event,helpText)
+}
+// handler for scheduling message
+function scheduleMessage(event){
+    const currentEpoch = Math.floor(new Date().getTime()/1000.0) 
+    const channelId = event.channel;
+    
+    (async () =>{
+    try {
+        
+    const result = await slackClient.chat.scheduleMessage({
+        channel: channelId,
+        text: "Will add scheduled message logic here",
+        post_at: currentEpoch + 120
+    });
+    const scheduledTime = 'Schedule set successfully ' + toReadableTime(result.post_at,event)
+    postMessage(scheduledTime, event )
     }
+    catch (error) {
+        console.error(error);
+    }
+})();
+}
 
-    bot.postMessageToChannel(
-        'motivatorbotdemo', 
-        `Oops, I dunno what to say.`, 
-        params
-    );    
-    handleHelp();
+// handler for reminding user
+function remindChannel(event){
+
+    const currentEpoch = Math.floor(new Date().getTime()/1000.0);
+
+    (async () =>{
+    try {
+        await slackClient.reminders.add({token : userToken , text : `A reminder is set for y'all !!!`, time:  currentEpoch+30, channel : event.channel})
+        const scheduledTime = 'Reminder set successfully at' + toReadableTime(currentEpoch+30,event)
+        postMessage(scheduledTime, event )
+    }catch(error){
+        console.error(error)
+    }
+})();
+}
+
+function remindUser(event){
+
+    const currentEpoch = Math.floor(new Date().getTime()/1000.0);
+
+    (async () =>{
+    try {
+        await slackClient.reminders.add({token : userToken , text : `A personal reminder is sent to you !!!`, time:  currentEpoch+30})
+        const scheduledTime = 'Reminder set successfully at ' + toReadableTime(currentEpoch+30,event)
+        postMessage(scheduledTime, event )
+    }catch(error){
+        console.error(error)
+    }
+})();
+}
+
+
+// function to convert unixtimestamp to readable format
+function toReadableTime(unix_timestamp, event){
+
+    var date = new Date(unix_timestamp * 1000);
+    var hours = date.getHours();
+    var minutes = "0" + date.getMinutes();
+    var seconds = "0" + date.getSeconds();
+    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    return formattedTime
+}
+
+function postMessage(event,text){
+    (async () =>{
+        try{
+            await slackClient.chat.postMessage({channel : event.channel, text : text })
+        }catch (error){
+            console.log(error.data)
+        }
+    })();
 }
