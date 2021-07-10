@@ -111,13 +111,26 @@ function handleQuotes(event){
 
 // handler for help keyword
 function handleHelp(event){
-    const helpText = `Hi. Please use keywords 'advice' or 'quotes' or 'affirmation' to get good vibes. 😺`
+    const helpText = 
+    `Hi. Hope you are doing good. 🤗
+     I am capable of following : 
+     1. Sending quotes, advice and affirmations daily.
+     2. Schedule any stuff and set reminders [schedule, remindme, remindus]
+     3. Sending Google Calendar event alert when you have a meeting within one hour, so you dont miss it. 
+     4. I send Github alerts when > you are mentioned,  or a branch is created or an issue is raised for your repository
+     5. Can search for your Github repository using /repository_exact_name command. Non Case sensitive. 
+     
+     I am constantly being updated for your better experience. 🥳`
+
+
     postMessage(event, helpText)
 }
 
 //// handler for error/no match case
 function handleError(event){
-    const oops = 'Oops, I dunno what you mean ?!'
+    const oops = 
+    `Oops, I dunno what you mean ?! 
+     Use 'help' for knowing my capabilities. 🥺`
     postMessage(event,oops)
 
 }
