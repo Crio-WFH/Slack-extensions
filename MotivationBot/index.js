@@ -114,7 +114,7 @@ function handleHelp(event){
 function handleError(event){
     const helpText = `Hi. Please use keywords 'advice' or 'quotes' or 'affirmation' to get good vibes. 😺`
     const oops = 'Oops, I dunno what you mean ?!'
-    postMessage(event, oops)
+    postMessage(event,oops)
     postMessage(event,helpText)
 }
 // handler for scheduling message
@@ -130,8 +130,9 @@ function scheduleMessage(event){
         text: "Will add scheduled message logic here",
         post_at: currentEpoch + 120
     });
-    const scheduledTime = 'Schedule set successfully ' + toReadableTime(result.post_at,event)
-    postMessage(scheduledTime, event )
+        const scheduledTime = 'Schedule set successfully ' + toReadableTime(result.post_at,event);
+        postMessage( event, scheduledTime )
+
     }
     catch (error) {
         console.error(error);
@@ -143,43 +144,34 @@ function scheduleMessage(event){
 function remindChannel(event){
 
     const currentEpoch = Math.floor(new Date().getTime()/1000.0);
+    const scheduledTime = 'Reminder set successfully at' + toReadableTime(currentEpoch+30,event);
 
     (async () =>{
     try {
         await slackClient.reminders.add({token : userToken , text : `A reminder is set for y'all !!!`, time:  currentEpoch+30, channel : event.channel})
-        const scheduledTime = 'Reminder set successfully at' + toReadableTime(currentEpoch+30,event)
-        postMessage(scheduledTime, event )
     }catch(error){
         console.error(error)
     }
 })();
+postMessage(scheduledTime, event )
 }
+
+
 
 function remindUser(event){
 
     const currentEpoch = Math.floor(new Date().getTime()/1000.0);
-
+    const scheduledTime = 'Reminder set successfully at ' + toReadableTime(currentEpoch+30,event);
     (async () =>{
     try {
         await slackClient.reminders.add({token : userToken , text : `A personal reminder is sent to you !!!`, time:  currentEpoch+30})
-        const scheduledTime = 'Reminder set successfully at ' + toReadableTime(currentEpoch+30,event)
-        postMessage(scheduledTime, event )
+        
     }catch(error){
         console.error(error)
     }
 })();
-}
+postMessage(event, scheduledTime)
 
-
-// function to convert unixtimestamp to readable format
-function toReadableTime(unix_timestamp, event){
-
-    var date = new Date(unix_timestamp * 1000);
-    var hours = date.getHours();
-    var minutes = "0" + date.getMinutes();
-    var seconds = "0" + date.getSeconds();
-    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-    return formattedTime
 }
 
 function postMessage(event,text){
@@ -190,4 +182,14 @@ function postMessage(event,text){
             console.log(error.data)
         }
     })();
+}
+// function to convert unixtimestamp to readable format
+function toReadableTime(unix_timestamp, event){
+
+    var date = new Date(unix_timestamp * 1000);
+    var hours = date.getHours();
+    var minutes = "0" + date.getMinutes();
+    var seconds = "0" + date.getSeconds();
+    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    return formattedTime
 }
