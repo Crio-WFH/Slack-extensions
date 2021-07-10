@@ -1,8 +1,11 @@
 
 // import statements
 const { WebClient, LogLevel } = require('@slack/web-api');
-const { createEventAdapter } = require('@slack/events-api')
+const { createEventAdapter } = require('@slack/events-api');
+
 const axios = require('axios')
+const cron = require("node-cron");
+let shell = require("shelljs");
 
 // token assignments from .env
 const slackSigningSecret = process.env.SLACK_SIGNING_SECRET
@@ -30,6 +33,8 @@ slackEvents.on('error', console.error)
 // console to output server has started
 slackEvents.start(port).then(()=>{
     console.log(`Slack Event onStart : Port : Server started on port ${port}`)
+    cronJob();
+
 })
 
 
@@ -50,7 +55,7 @@ function handleMessage(event){
         handleQuotes(event);
     }
     
-    if(message.includes(' help') || message.includes(' Hi') || message.includes(' Hey')){
+    if(message.includes(' help')){
         handleHelp(event);
     }    
     if(message.includes(' schedule')){
@@ -112,10 +117,9 @@ function handleHelp(event){
 
 //// handler for error/no match case
 function handleError(event){
-    const helpText = `Hi. Please use keywords 'advice' or 'quotes' or 'affirmation' to get good vibes. 😺`
     const oops = 'Oops, I dunno what you mean ?!'
     postMessage(event,oops)
-    postMessage(event,helpText)
+
 }
 // handler for scheduling message
 function scheduleMessage(event){
@@ -177,7 +181,7 @@ postMessage(event, scheduledTime)
 function postMessage(event,text){
     (async () =>{
         try{
-            await slackClient.chat.postMessage({channel : event.channel, text : text })
+            await slackClient.chat.postMessage({channel : event.channel, text : '> '+ text })
         }catch (error){
             console.log(error.data)
         }
@@ -192,4 +196,64 @@ function toReadableTime(unix_timestamp, event){
     var seconds = "0" + date.getSeconds();
     var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
     return formattedTime
+}
+
+function postSimpleMessage(text){
+
+    (async () =>{
+        const result = await slackClient.chat.postMessage({
+            // The token you used to initialize your app
+            token: slackToken,
+            channel: 'motivatorbotdemo',
+            text: '> '+text
+            // You could also use a blocks[] array to send richer content
+          });
+
+          console.log(result)
+        })();
+
+}
+
+function cronJob(){
+try{
+    console.log("Cron Job Started ...")
+    
+    //  set advice message at 3 PM
+    cron.schedule("0 0 15 * * MON,TUE,WED,THU,FRI,SAT,SUN *", function(){
+        
+        axios.get('https://api.adviceslip.com/advice')
+        .then(res =>{
+            const advice = res.data.slip.advice + '🥺👉👈';
+            console.log(advice)
+            postSimpleMessage(advice)
+        })
+    
+    });
+
+    //set morning affirmation message at 9 AM 
+    cron.schedule("0 0 9 * * MON,TUE,WED,THU,FRI,SAT,SUN *", function(){
+    
+    axios.get('https://www.affirmations.dev')
+    .then(res =>{
+        const affirmation = 'Hi, Good Morning. '+ res.data.affirmation +'🤗';
+        console.log(affirmation)
+        postSimpleMessage(affirmation)
+    })
+
+    });
+
+    // set quote message at 6 PM
+    cron.schedule("0 0 18 * * MON,TUE,WED,THU,FRI,SAT,SUN *", function(){
+        axios.get("https://type.fit/api/quotes")
+        .then(res =>{
+            const rand = Math.floor(Math.random()*1000);
+            const quotes = res.data[rand].text + '🤔';
+            console.log(quotes)
+            postSimpleMessage(quotes)
+        })
+    });
+
+    }catch(error){
+        console.log(error)
+    }
 }
