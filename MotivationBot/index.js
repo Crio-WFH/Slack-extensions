@@ -2,6 +2,7 @@
 // import statements
 const { WebClient, LogLevel } = require('@slack/web-api');
 const { createEventAdapter } = require('@slack/events-api');
+const friendlyCron = require('friendly-cron')
 
 const axios = require('axios')
 const cron = require("node-cron");
@@ -136,41 +137,58 @@ function handleError(event){
 }
 // handler for scheduling message
 function scheduleMessage(event){
-    const currentEpoch = Math.floor(new Date().getTime()/1000.0) 
-    const channelId = event.channel;
+    const message = event.text
     
-    (async () =>{
-    try {
-        
-    const result = await slackClient.chat.scheduleMessage({
-        channel: channelId,
-        text: "Will add scheduled message logic here",
-        post_at: currentEpoch + 120
-    });
-        const scheduledTime = 'Schedule set successfully ' + toReadableTime(result.post_at,event);
-        postMessage( event, scheduledTime )
+    const splitMessage = message.split(',')
+    console.log(splitMessage)
 
-    }
-    catch (error) {
-        console.error(error);
-    }
-})();
+    const messageToRemind = splitMessage[0].split("schedule ")
+    const pattern = friendlyCron(splitMessage[splitMessage.length-1])
+    cron.schedule(pattern, function(){
+        postMessage(event, messageToRemind[messageToRemind.length-1])
+    });
+
 }
 
 // handler for reminding user
 function remindChannel(event){
 
+    const message = event.text
+    const splitMessage = message.split(',')
+    const timeDesc = splitMessage[1].split(" ")
+    const resposeLength = timeDesc.length
+
     const currentEpoch = Math.floor(new Date().getTime()/1000.0);
-    const scheduledTime = 'Reminder set successfully at' + toReadableTime(currentEpoch+30,event);
+    var futureTime = currentEpoch
+    var scheduledTimeMessage = 'Reminder set successfully at ' + toReadableTime(futureTime,event);
+    
+
+    if(timeDesc[resposeLength-1] === 'hour' || timeDesc[resposeLength-1] === 'hours' || timeDesc[resposeLength-1] === 'hh' || timeDesc[resposeLength-1] === 'h' ){
+        futureTime = currentEpoch + (parseInt(timeDesc[resposeLength-2]) * 3600)
+//      scheduledTimeMessage = 'Reminder set successfully at ' + toReadableTime(futureTime,event);
+    }
+    else if(timeDesc[resposeLength-1] === 'minute' || timeDesc[resposeLength-1] === 'minutes' || timeDesc[resposeLength-1] === 'mm' || timeDesc[resposeLength-1] === 'm' ){
+        futureTime = currentEpoch + (parseInt(timeDesc[resposeLength-2]) * 60)
+//      scheduledTimeMessage = 'Reminder set successfully at ' + toReadableTime(futureTime,event);
+    }
+    else if(timeDesc[resposeLength-1] === 'day' || timeDesc[resposeLength-1] === 'days' || timeDesc[resposeLength-1] === 'dd' || timeDesc[resposeLength-1] === 'd'){
+        futureTime = currentEpoch + (parseInt(timeDesc[resposeLength-2]) * 86400)
+
+//      scheduledTimeMessage = 'Reminder set successfully for ' + timeDesc[resposeLength-2] +  ' day' ;       
+    }
+
+    const messageToRemind = splitMessage[0].split("remindus")
+    console.log('>>>>>>>>>>>>'+ messageToRemind[messageToRemind.length-1]);
 
     (async () =>{
     try {
-        await slackClient.reminders.add({token : userToken , text : `A reminder is set for y'all !!!`, time:  currentEpoch+30, channel : event.channel})
+        await slackClient.reminders.add({token : userToken , text :messageToRemind[messageToRemind.length-1], time:  futureTime, channel : event.channel})
+        
     }catch(error){
         console.error(error)
     }
 })();
-postMessage(scheduledTime, event )
+
 }
 
 
