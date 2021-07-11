@@ -31,10 +31,10 @@
 
 Commands That work : 
 - help : Displays help commands (syntax : **@Motivator Bot** help>
-- /searchrepo : Search a repo within your Github org (syntax : /searchrepo <repository name>)
-- remindme : set reminder your user (syntax : **@Motivator Bot** remindme <message>,<minute or hour or day>)
-- remindus : set reminder for channel (syntax : **@Motivator Bot** remindus <message>,<minute or hour or day>)
-- schedule : schedule message (syntax : **@Motivator Bot** schedule <message>,<friendly expression>)
+- /searchrepo : Search a repo within your Github org (syntax : /searchrepo repository-name)
+- remindme : set reminder your user (syntax : **@Motivator Bot** remindme message,minute or hour or day)
+- remindus : set reminder for channel (syntax : **@Motivator Bot** remindus message,minute or hour or day)
+- schedule : schedule message (syntax : **@Motivator Bot** schedule message,friendly expression)
 - quotes : (syntax : **@Motivator Bot** quotes)
 - advice : (syntax : **@Motivator Bot** advice)
 - affirmation : (syntax : **@Motivator Bot** affirmation)
