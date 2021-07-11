@@ -1,5 +1,5 @@
 
-## MotivatorBot [ UNDER REVIEW ]
+## MotivatorBot
 
 ### A simple bot which pushes you forward to do more with the help of alerts, reminders, schedulers, and Github, Google Calendar Integrations.
 
