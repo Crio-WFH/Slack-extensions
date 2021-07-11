@@ -23,8 +23,9 @@
   _Bold words mentioned above are keywords/commands._  
   _Commands supported [advice, affirmations, quotes, help, remindme, remindus, schedule, /searchrepo]_
 </p>  
+
 ### Screenshots of the extension/software's working 
-<img src="https://github.com/theprogrammedwords/Slack-extensions/blob/main/MotivationBot/Screenshot_slack.png">
+<img src="https://github.com/theprogrammedwords/Slack-extensions/blob/main/MotivationBot/Screenshot%202021-07-11%20at%2012.23.19%20PM.png">
 
 ### Demo Video Link
 - [DEMO VIDEO](https://youtu.be/ApOoip605V8)
