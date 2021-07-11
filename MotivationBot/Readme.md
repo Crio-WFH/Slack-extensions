@@ -60,19 +60,19 @@ Triggers that work :
 - ngrok
 
 ## PipeDream Workflows 
-Issue Creation : 
+- Issue Creation : 
 https://pipedream.com/@rprasad43255/github-to-slack-communication-issuecreation-p_PACWRBV
 
-New Branch : 
+- New Branch : 
 https://pipedream.com/@rprasad43255/github-to-slack-communication-new-branch-p_OKCYwGr
 
-User Mentions : 
+- User Mentions : 
 https://pipedream.com/@rprasad43255/github-to-slack-communication-new-branch-p_OKCYwGr
   
-Search repo : 
+- Search repo : 
 https://pipedream.com/@rprasad43255/github-to-slack-communication-search-github-repo-p_PACWRJZ
   
-Get Next Google Calendar Event : 
+- Get Next Google Calendar Event : 
 https://pipedream.com/@rprasad43255/googlecalendaralerts-p_YyCWZwG
 
 ## Quick Start
