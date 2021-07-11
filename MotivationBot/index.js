@@ -115,7 +115,7 @@ function handleHelp(event){
     `Hi. Hope you are doing good. 🤗
      I am capable of following : 
      1. Sending quotes, advice and affirmations daily.
-     2. Schedule any stuff and set reminders [schedule, remindme, remindus]
+     2. Set reminders [remindme, remindus] with precision of minutes, hours, or days
      3. Sending Google Calendar event alert when you have a meeting within one hour, so you dont miss it. 
      4. I send Github alerts when > you are mentioned,  or a branch is created or an issue is raised for your repository
      5. Can search for your Github repository using /repository_exact_name command. Non Case sensitive. 
@@ -177,17 +177,42 @@ postMessage(scheduledTime, event )
 
 function remindUser(event){
 
+    const message = event.text
+    const splitMessage = message.split(',')
+    const timeDesc = splitMessage[1].split(" ")
+    const resposeLength = timeDesc.length
+
     const currentEpoch = Math.floor(new Date().getTime()/1000.0);
-    const scheduledTime = 'Reminder set successfully at ' + toReadableTime(currentEpoch+30,event);
+    var futureTime = currentEpoch
+    var scheduledTimeMessage = 'Reminder set successfully at ' + toReadableTime(futureTime,event);
+    
+
+    if(timeDesc[resposeLength-1] === 'hour' || timeDesc[resposeLength-1] === 'hours' || timeDesc[resposeLength-1] === 'hh' || timeDesc[resposeLength-1] === 'h' ){
+        futureTime = currentEpoch + (parseInt(timeDesc[resposeLength-2]) * 3600)
+        scheduledTimeMessage = 'Reminder set successfully at ' + toReadableTime(futureTime,event);
+    }
+    else if(timeDesc[resposeLength-1] === 'minute' || timeDesc[resposeLength-1] === 'minutes' || timeDesc[resposeLength-1] === 'mm' || timeDesc[resposeLength-1] === 'm' ){
+        futureTime = currentEpoch + (parseInt(timeDesc[resposeLength-2]) * 60)
+        scheduledTimeMessage = 'Reminder set successfully at ' + toReadableTime(futureTime,event);
+    }
+    else if(timeDesc[resposeLength-1] === 'day' || timeDesc[resposeLength-1] === 'days' || timeDesc[resposeLength-1] === 'dd' || timeDesc[resposeLength-1] === 'd'){
+        futureTime = currentEpoch + (parseInt(timeDesc[resposeLength-2]) * 86400)
+
+        scheduledTimeMessage = 'Reminder set successfully for ' + timeDesc[resposeLength-2] +  ' day' ;       
+    }
+
+    const messageToRemind = splitMessage[0].split("remindme")
+    console.log('>>>>>>>>>>>>'+ messageToRemind[messageToRemind.length-1]);
+
     (async () =>{
     try {
-        await slackClient.reminders.add({token : userToken , text : `A personal reminder is sent to you !!!`, time:  currentEpoch+30})
+        await slackClient.reminders.add({token : userToken , text :messageToRemind[messageToRemind.length-1], time:  futureTime})
         
     }catch(error){
         console.error(error)
     }
 })();
-postMessage(event, scheduledTime)
+postMessage(event, scheduledTimeMessage)
 
 }
 
