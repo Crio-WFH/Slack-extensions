@@ -21,7 +21,6 @@
 <p>
 
   _Bold words mentioned above are keywords/commands._  
-  _Commands supported [advice, affirmations, quotes, help, remindme, remindus, schedule, /searchrepo]_
 </p>  
 
 ### Screenshots of the extension/software's working 
@@ -31,30 +30,59 @@
 - [DEMO VIDEO](https://youtu.be/ApOoip605V8)
 
 Commands That work : 
-- help
-- quotes
-- advice
-- affirmation
+- help : Displays help commands (syntax : **@Motivator Bot** help>
+- /searchrepo : Search a repo within your Github org (syntax : /searchrepo <repository name>)
+- remindme : set reminder your user (syntax : **@Motivator Bot** remindme <message>,<minute or hour or day>)
+- remindus : set reminder for channel (syntax : **@Motivator Bot** remindus <message>,<minute or hour or day>)
+- schedule : schedule message (syntax : **@Motivator Bot** schedule <message>,<friendly expression>)
+- quotes : (syntax : **@Motivator Bot** quotes)
+- advice : (syntax : **@Motivator Bot** advice)
+- affirmation : (syntax : **@Motivator Bot** affirmation)
 
-
+Triggers that work : 
+- Github Issue creation
+- Github Branch creation
+- Github mentions
+- Next Google Calendar Event (within an hour)
 
 ## APIs Used:
-[https://api.adviceslip.com/advice](https://api.adviceslip.com/advice)
+[https://api.adviceslip.com/advice](https://api.adviceslip.com/advice) <br>
+[https://www.affirmations.dev](https://www.affirmations.dev) <br>
+[https://type.fit/api/quotes](https://type.fit/api/quotes) <br>
+<br>
 
-[https://www.affirmations.dev](https://www.affirmations.dev)
+## Libraries used
+- Slack Web API
+- Slack Events API
+- friendly cron
+- node cron
+- axios
+- ngrok
 
-[https://type.fit/api/quotes](https://type.fit/api/quotes)
 
 ## Quick Start
 
 ``` bash
 # Install dependencies
 npm install
-
+npm install @slack/web-api
+npm install @slack/events-api
+npm install friendly-cron
+npm install node-cron
+npm install axios
+npm i -g ngrok 
+  
 # Serve on localhost:3000
 npm start
-
-# Create bot in Slack and generate and include your OAuth bot token
+  
+# Start ngrok endpoint and add it to slack bot Event Subscription Request URL  
+ngrok http localhost   
+node index.js
+# Create bot in Slack and generate and include your Bot, User and Signing Secrets in .env
+## while running export secrets of env
+export SLACK_TOKEN=<botToken>
+export SLACK_SIGNING_SECRET=<secret>
+export USER_TOKEN=<userToken>
 ```
 
 ## App Info
@@ -65,7 +93,7 @@ npm start
 
 ### Version
 
-1.0.0
+1.1.0
 
 ### License
 
