@@ -59,6 +59,21 @@ Triggers that work :
 - axios
 - ngrok
 
+## PipeDream Workflows 
+Issue Creation : 
+https://pipedream.com/@rprasad43255/github-to-slack-communication-issuecreation-p_PACWRBV
+
+New Branch : 
+https://pipedream.com/@rprasad43255/github-to-slack-communication-new-branch-p_OKCYwGr
+
+User Mentions : 
+https://pipedream.com/@rprasad43255/github-to-slack-communication-new-branch-p_OKCYwGr
+  
+Search repo : 
+https://pipedream.com/@rprasad43255/github-to-slack-communication-search-github-repo-p_PACWRJZ
+  
+Get Next Google Calendar Event : 
+https://pipedream.com/@rprasad43255/googlecalendaralerts-p_YyCWZwG
 
 ## Quick Start
 
