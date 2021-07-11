@@ -114,13 +114,16 @@ function handleQuotes(event){
 function handleHelp(event){
     const helpText = 
     `Hi. Hope you are doing good. 🤗
+    ....
      I am capable of following : 
      1. Sending quotes, advice and affirmations daily.
      2. Set reminders [remindme, remindus] with precision of minutes, hours, or days
      3. Sending Google Calendar event alert when you have a meeting within one hour, so you dont miss it. 
      4. I send Github alerts when > you are mentioned,  or a branch is created or an issue is raised for your repository
-     5. Can search for your Github repository using /repository_exact_name command. Non Case sensitive. 
-     
+     5. Can search for your Github repository using /repository_exact_name command. Non Case sensitive.
+     6. Can schedule messages with friendly precision [every minute, every hour, every day] with schedule keyword
+     ....
+     commands [advice, affirmations, quotes, help, remindme, remindus, schedule, /searchrepo]
      I am constantly being updated for your better experience. 🥳`
 
 
