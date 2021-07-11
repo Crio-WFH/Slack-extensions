@@ -29,6 +29,9 @@
 ### Demo Video Link
 - [DEMO VIDEO](https://youtu.be/GFMnQXL8SBg)
 
+### Medium Blog 
+- [Blog](https://theprogrammedwords.medium.com/motivator-bot-slack-bot-4a0b2e9aaf92)
+
 Commands That work : 
 - help : Displays help commands (syntax : **@Motivator Bot** help>
 - /searchrepo : Search a repo within your Github org (syntax : /searchrepo repository-name)
