@@ -27,7 +27,7 @@
 <img src="https://github.com/theprogrammedwords/Slack-extensions/blob/main/MotivationBot/Screenshot%202021-07-11%20at%2012.23.19%20PM.png">
 
 ### Demo Video Link
-- [DEMO VIDEO](https://youtu.be/ApOoip605V8)
+- [DEMO VIDEO](https://youtu.be/GFMnQXL8SBg)
 
 Commands That work : 
 - help : Displays help commands (syntax : **@Motivator Bot** help>
