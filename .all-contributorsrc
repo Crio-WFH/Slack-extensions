@@ -53,6 +53,18 @@
         "doc",
         "code"
       ]
+    },
+    {
+      "login": "theprogrammedwords",
+      "name": "Ashish Prasad",
+      "avatar_url": "https://avatars.githubusercontent.com/u/33520299?v=4",
+      "profile": "https://www.thevirtualcodes.com/",
+      "contributions": [
+        "code",
+        "design",
+        "infra",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
