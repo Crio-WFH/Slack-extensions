@@ -65,6 +65,18 @@
         "infra",
         "ideas"
       ]
+    },
+    {
+      "login": "nimisha-yadav",
+      "name": "Nimisha Yadav",
+      "avatar_url": "https://avatars.githubusercontent.com/u/73909578?v=4",
+      "profile": "https://www.linkedin.com/in/nimisha-yadav",
+      "contributions": [
+        "code",
+        "ideas",
+        "infra",
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
