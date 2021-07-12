@@ -14,12 +14,12 @@ Just Press `Cmd + B` / `Ctrl + B`
   - Click `Add Configuration` and give it a username (say _bookmarks-bot_), purpose, etc.
   - A Bot token starting with `xoxb-` will be generated.
 
-  - Clone this Repo.
-  - __Change the Token and channel name__ in `config.js` accordingly.
-  - Visit chrome settings & ensure that the Developer mode is turned on in extensions.
-  - Click Load unpacked extension.
-  - Select the directory.
-  - :tada: It's done!
+ - Clone this Repo.
+ - __Change the Token and channel name__ in `config.js` accordingly.
+ - Visit chrome settings & ensure that the Developer mode is turned on in extensions.
+ - Click Load unpacked extension.
+ - Select the directory.
+ - :tada: It's done!
 
 ## How to use
 - Press `Cmd + B`
@@ -27,4 +27,8 @@ Just Press `Cmd + B` / `Ctrl + B`
 - A _notification_ comes from __bookmarks-bot__ 
 - All your bookmarks are saved in __bookmarks-bot__ chat window.
 
+## Demo Video
+- Video Link - https://youtu.be/F6z6cWl5aLY
+
+## Blog Link
 - Blog Link - https://nimishayadav.medium.com/slackmarks-7ce688ae9fe0
